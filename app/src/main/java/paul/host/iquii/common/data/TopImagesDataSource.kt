@@ -13,5 +13,5 @@ class TopImagesDataSource {
         keyWordSubject.toFlowable(BackpressureStrategy.LATEST)
             .flatMapSingle(API::getTop)
             .distinctUntilChanged()
-            .map { it.getImages() }
+            .map { response -> response.getImages().filter { it[0] == 'h' } }
 }
