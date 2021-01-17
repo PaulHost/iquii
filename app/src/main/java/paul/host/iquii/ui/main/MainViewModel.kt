@@ -19,6 +19,8 @@ class MainViewModel : ViewModel() {
             .subscribe(imagesLifeData::postValue, Timber::e)
     }
 
+    fun setKeyWord(keyWord: String) = topImagesDataSource.setKeyWard(keyWord)
+
     override fun onCleared() {
         super.onCleared()
         disposable.dispose()

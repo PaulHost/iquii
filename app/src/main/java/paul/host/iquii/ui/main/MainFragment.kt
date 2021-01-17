@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.main_fragment.*
 import paul.host.iquii.R
+import paul.host.iquii.common.onTextChange
 
 
 class MainFragment : Fragment() {
@@ -39,8 +41,8 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        editText.onTextChange(viewModel::setKeyWord)
         viewModel.imagesLifeData.observe(viewLifecycleOwner, Observer { adapter.setList(it) })
-
     }
 
 }

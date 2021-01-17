@@ -3,7 +3,7 @@ package paul.host.iquii.common.data
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import io.reactivex.Single
+import io.reactivex.Flowable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,7 +17,7 @@ val API: Api = RetrofitProvider.retrofit.create(Api::class.java)
 
 interface Api {
     @GET("/r/{key_word}/top.json")
-    fun getTop(@Path("key_word") keyWord: String): Single<Response>
+    fun getTop(@Path("key_word") keyWord: String): Flowable<Response>
 }
 
 object RetrofitProvider {
