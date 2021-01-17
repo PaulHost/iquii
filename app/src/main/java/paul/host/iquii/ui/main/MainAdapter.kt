@@ -15,8 +15,8 @@ import timber.log.Timber
 class MainAdapter(
     context: Context,
     private val list: MutableList<String> = mutableListOf(),
-    private val picasso: Picasso = Builder(context).build()
-
+    private val picasso: Picasso = Builder(context).build(),
+    private val onItemClick: (url: String) -> Unit = { _ -> }
 ) : RecyclerView.Adapter<MainViewHolder>() {
 
     fun setList(list: List<String>) {
@@ -34,7 +34,9 @@ class MainAdapter(
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        picasso.load(list[position]).into(holder.image)
+        val url = list[position]
+        picasso.load(url).into(holder.image)
+        holder.image.setOnClickListener { onItemClick(url) }
     }
 }
 

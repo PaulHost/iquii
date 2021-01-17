@@ -1,5 +1,6 @@
 package paul.host.iquii.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.main_fragment.*
 import paul.host.iquii.R
 import paul.host.iquii.common.onTextChange
+import paul.host.iquii.ui.Navigation
 
 
 class MainFragment : Fragment() {
@@ -25,13 +27,20 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: MainAdapter
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        adapter = MainAdapter(
+            context = context,
+            onItemClick = (context as Navigation)::goToImageFragment
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.main_fragment, container, false).apply {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val manager: RecyclerView.LayoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.layoutManager = manager
-        adapter = MainAdapter(requireContext())
         recyclerView.adapter = adapter
         recyclerView.addItemDecoration(
             DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
