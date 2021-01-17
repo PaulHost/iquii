@@ -2,7 +2,6 @@ package paul.host.iquii.common.data
 
 import com.google.gson.annotations.SerializedName
 import paul.host.iquii.common.EMPTY_STRING
-import timber.log.Timber
 
 
 data class Response(
@@ -12,9 +11,19 @@ data class Response(
     val kind: String? = null
 ) {
     fun getImages(): List<String> = data?.children?.map {
-        Timber.d("MY_LOG: $it")
         it?.data?.thumbnail ?: EMPTY_STRING
     } ?: emptyList()
+/*
+    TODO: correct method to get images but need to access || https://www.reddit.com/dev/api
+
+        fun getImages(): List<String> = mutableListOf<String>().apply {
+            data?.children?.forEach { children ->
+                this += children?.data?.preview?.images?.map {
+                    it?.source?.url ?: EMPTY_STRING
+                } ?: emptyList()
+            }
+        }
+*/
 }
 
 

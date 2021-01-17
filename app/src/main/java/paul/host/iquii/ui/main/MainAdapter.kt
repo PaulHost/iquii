@@ -34,7 +34,6 @@ class MainAdapter(
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        Timber.d("onBindViewHolder: to load = ${list[position]}")
         picasso.load(list[position]).into(holder.image)
     }
 }
